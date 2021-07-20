@@ -1,0 +1,8 @@
+__pycache__/
+.tox/
+*.pyc
+*.snap
+.coverage
+.idea
+htmlcov/
+venv

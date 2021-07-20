@@ -1,0 +1,18 @@
+# Copyright 2021 Ryan Farrell
+# See LICENSE file for licensing details.
+name: algorand-node
+maintainer: ZestBloom Inc <zestbloom@gmail.com>
+description: |
+  An Algorand non-relay node is able to participate in consensus, access to the
+  ledger and can be used with applications that need to connect to the network
+  to submit transactions and read block data.
+tags:
+  - "blockchain"
+summary: |
+  Charm deploys an Algorand non-relay node and manages node configuration.
+series:
+  - "focal"
+  - "bionic"
+  - "xenial"
+
+

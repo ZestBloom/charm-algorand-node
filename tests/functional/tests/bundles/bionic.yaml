@@ -1,0 +1,8 @@
+series: bionic
+
+services:
+  algonode:
+    charm: ../../../../
+    num_units: 1
+    options:
+        algo_net: testnet
