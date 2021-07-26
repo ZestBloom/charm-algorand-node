@@ -1,12 +1,15 @@
 #! /usr/bin/env python3
-# Copyright © 2021 Ryan Farrell, rfarr@zestbloom.com
+# Copyright © 2021 ZestBloom Inc
 # Distributed under terms of the GPL license.
 
 import logging
 import shutil
 
 from charmhelpers.core import templating
-
+from charmhelpers.core.host import (
+    service_start,
+    service_stop,
+)
 
 class AlgorandHelper:
     """Algorand Node Helper module"""
@@ -41,8 +44,9 @@ class AlgorandHelper:
         self.render_config()
 
         if self.state.started:
-            # TODO: Restart service
-            pass
+            service_stop()
+            service_start()
+
 
     def render_config(self):
         """Render algorand node config file"""

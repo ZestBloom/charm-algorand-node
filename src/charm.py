@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2021 Ryan Farrell
+# Copyright 2021 ZestBloom Inc
 # See LICENSE file for licensing details.
 
 """Charm the service."""
@@ -59,9 +59,6 @@ class AlgorandCharm(CharmBase):
         """Charm installation event handler"""
         self.unit.status = MaintenanceStatus("Installing charm software")
 
-        # dest = "/tmp/algorand-key.pub"
-        # wget.download(url, dest)
-
         # Perform install tasks
         try:
             packages = ["algorand", "algorand-devtools"]
@@ -96,9 +93,12 @@ class AlgorandCharm(CharmBase):
 
             return
 
-        self.helper.configure()
-
-        # Update install components
+        try:
+            self.helper.configure()
+            self.unit.status = ActiveStatus()
+        except Exception as e:
+            logging.error(e)
+            self.unit.status = ModelError("Config Change Error")
 
     def _on_start(self, _):
         pass

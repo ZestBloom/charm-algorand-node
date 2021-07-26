@@ -1,5 +1,6 @@
 -r ../../requirements.txt
 mock
+jinja2
 six
 coverage
 pyyaml
