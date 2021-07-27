@@ -70,6 +70,7 @@ ACTIONS = {
 
 
 def main(args):
+    os.environ["ALGORAND_DATA"] = "/var/lib/algorand"
     action_name = os.path.basename(args[0])
     try:
         action = ACTIONS[action_name]
