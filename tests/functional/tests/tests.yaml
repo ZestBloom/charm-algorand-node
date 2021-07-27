@@ -4,7 +4,7 @@ configure:
   - zaza.charm_tests.noop.setup.basic_setup
 target_deploy_status:
   algonode:
-    workload-status: installed
+    workload-status: active
 gate_bundles:
   - xenial
   - bionic

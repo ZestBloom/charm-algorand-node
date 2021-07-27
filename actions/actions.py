@@ -4,6 +4,7 @@
 
 import os
 import sys
+import urllib3
 
 from subprocess import check_output, CalledProcessError
 
@@ -22,6 +23,7 @@ _add_path(_lib)
 from charmhelpers.core.hookenv import (
     action_fail,
     action_set,
+    config,
 )
 
 from charmhelpers.core.host import (
@@ -29,9 +31,15 @@ from charmhelpers.core.host import (
     service_stop,
 )
 
+FAST_CATCHUP_URLS = {
+    "betanet": "https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/betanet/latest.catchpoint",
+    "testnet": "https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/testnet/latest.catchpoint",
+    "mainnet": "https://algorand-catchpoints.s3.us-east-2.amazonaws.com/channel/mainnet/latest.catchpoint",
+}
+
 
 def check_node_status(args):
-    """Return the output of 'rabbitmqctl cluster_status'.
+    """Return the output of 'goal node status'.
 
     :param args: Unused
     :type args: List[str]
@@ -42,7 +50,7 @@ def check_node_status(args):
         action_set({'output': nodestat})
     except CalledProcessError as e:
         action_set({'output': e.output})
-        action_fail('Failed to run rabbitmqctl cluster_status')
+        action_fail('Failed to check algorand node status')
     except Exception:
         raise
 
@@ -60,6 +68,25 @@ def restart_service(args):
         action_set({'output': e.output})
         action_fail('Failed to start algorand service after force_boot')
         return False
+
+
+def fast_catchup(args):
+    """Executes Fast Catch-Up for the Node"""
+
+    # Get the Fast Catch-Up Token
+    algo_net = config()["algonet"]
+    catchup_url =  FAST_CATCHUP_URLS[algo_net]
+    http = urllib3.PoolManager()
+    r = http.request('GET', catchup_url)
+    catchup_token = r.data.decode("utf-8").strip()
+
+    try:
+        cmd = ['goal', 'node', 'catchup', f'{catchup_token}']
+        catchup_op = check_output(cmd, universal_newlines=True)
+        action_set({'output': catchup_op})
+    except CalledProcessError as e:
+        action_set({'output': e.output})
+        action_fail('Failed to run fast-catchup')
 
 
 # A dictionary mapping the defined actions to callables

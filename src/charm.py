@@ -66,6 +66,7 @@ class AlgorandCharm(CharmBase):
                 source=self.model.config.get('install_source', None),
                 key=self.model.config.get('install_key', None),
             )
+            apt_update()
             apt_install(packages, fatal=True)
         except Exception:
             self.unit.status = BlockedStatus("Algorand failed to install")
@@ -95,6 +96,9 @@ class AlgorandCharm(CharmBase):
 
         try:
             self.helper.configure()
+            if not self.state.started:
+                host.service_start(self.helper.service_name)
+                self.state.started = True
             self.unit.status = ActiveStatus()
         except Exception as e:
             logging.error(e)
