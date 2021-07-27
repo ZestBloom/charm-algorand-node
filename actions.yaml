@@ -6,3 +6,5 @@ check-node-status:
 restart-service:
   description: Restarts Algorand daemon
 
+fast-catchup:
+  description: Executes node fast-catchup

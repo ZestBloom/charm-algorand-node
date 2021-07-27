@@ -1,7 +1,7 @@
 # Copyright 2021 ZestBloom Inc
 # See LICENSE file for licensing details.
 name: algorand-node
-maintainer: ZestBloom Inc <zestbloom@gmail.com>
+maintainer: ZestBloom Inc <team@zestbloom.com>
 description: |
   An Algorand non-relay node is able to participate in consensus, access to the
   ledger and can be used with applications that need to connect to the network
