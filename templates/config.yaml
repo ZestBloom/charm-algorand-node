@@ -26,7 +26,7 @@
     "EnableAssembleStats": false,
     "EnableBlockService": false,
     "EnableCatchupFromArchiveServers": false,
-    "EnableDeveloperAPI": false,
+    "EnableDeveloperAPI": {{ EnableDeveloperAPI }},
     "EnableGossipBlockService": true,
     "EnableIncomingMessageFilter": false,
     "EnableLedgerService": false,

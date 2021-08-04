@@ -50,6 +50,7 @@ class AlgorandHelper:
         context["AnnounceParticipationKey"] = self.charm_config.get("AnnounceParticipationKey")
         context["Archival"] = self.charm_config.get("Archival")
         context["BaseLoggerDebugLevel"] = self.charm_config.get("BaseLoggerDebugLevel")
+        context["EnableDeveloperAPI"] = self.charm_config.get("EnableDeveloperAPI")
 
         # TODO
         # TLS Cert

@@ -175,11 +175,21 @@ options:
   Archival:
     default: "false"
     description: |
-      TODO
+      When true, the node is configured as an Archival node. Archival nodes
+      retain a full copy of the ledger (blockchain). Non-Archival nodes will
+      delete old blocks and only retain what's need to properly validate
+      blockchain messages (currently the last 1000 blocks).
     type: string
   BaseLoggerDebugLevel:
     default: 4
     description: |
-      TODO
+      Specifies the logging level for algod (node.log). The levels range from 0
+      (critical error / silent) to 5 (debug / verbose). This setting is
+      currently ignored. In the future, it will default to 4 (‘Info’ - fairly
+      verbose).
     type: int
-
+  EnableDeveloperAPI:
+    default: "false"
+    description: |
+      EnableDeveloperAPI enables teal/compile, teal/dryrun API endpoints. This
+      functionality is disabled by default.
