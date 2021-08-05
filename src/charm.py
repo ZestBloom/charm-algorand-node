@@ -99,6 +99,9 @@ class AlgorandCharm(CharmBase):
             if not self.state.started:
                 host.service_start(self.helper.service_name)
                 self.state.started = True
+            else:
+                host.service_stop(self.helper.service_name)
+                host.service_start(self.helper.service_name)
             self.unit.status = ActiveStatus()
         except Exception as e:
             logging.error(e)

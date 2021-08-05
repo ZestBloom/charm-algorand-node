@@ -74,7 +74,7 @@ def fast_catchup(args):
     """Executes Fast Catch-Up for the Node"""
 
     # Get the Fast Catch-Up Token
-    algo_net = config()["algonet"]
+    algo_net = config()["algo_net"]
     catchup_url =  FAST_CATCHUP_URLS[algo_net]
     http = urllib3.PoolManager()
     r = http.request('GET', catchup_url)
@@ -93,6 +93,7 @@ def fast_catchup(args):
 ACTIONS = {
     "check-node-status": check_node_status,
     "restart-service": restart_service,
+    "fast-catchup": fast_catchup,
 }
 
 
